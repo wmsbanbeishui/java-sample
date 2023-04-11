@@ -23,7 +23,7 @@ public class DruidConfig {
        @ConfigurationProperties(prefix = "spring.datasource")：作用就是将 全局配置文件中
        前缀为 spring.datasource的属性值注入到 com.alibaba.druid.pool.DruidDataSource 的同名参数中
      */
-    @ConfigurationProperties(prefix = "spring.datasource.druid")
+    @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druidDataSource() {
         return new DruidDataSource();
