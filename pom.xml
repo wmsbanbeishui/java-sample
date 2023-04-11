@@ -29,6 +29,8 @@
         <mybatis.version>3.4.1</mybatis.version>
         <knife4j.version>3.0.3</knife4j.version>
         <log4j.version>1.2.17</log4j.version>
+        <jwt.version>0.11.5</jwt.version>
+        <hutool.version>5.8.12</hutool.version>
     </properties>
 
     <dependencyManagement>
@@ -71,22 +73,52 @@
             </dependency>
             <!-- knife4j -->
 
+            <!-- log4j -->
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <!-- log4j -->
+
+            <!--jjwt-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <!--jjwt-->
+
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- hutool -->
 
             <!-- jdbc -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>2.7.8</version>
             </dependency>
             <!-- jdbc -->
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
+                <version>2.7.10</version>
                 <scope>test</scope>
             </dependency>
 
