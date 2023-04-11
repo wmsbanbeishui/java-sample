@@ -23,7 +23,7 @@ public class DruidConfig {
        @ConfigurationProperties(prefix = "spring.datasource")：作用就是将 全局配置文件中
        前缀为 spring.datasource的属性值注入到 com.alibaba.druid.pool.DruidDataSource 的同名参数中
      */
-    @ConfigurationProperties(prefix = "spring.datasource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid")
     @Bean
     public DataSource druidDataSource() {
         return new DruidDataSource();
@@ -31,7 +31,7 @@ public class DruidConfig {
 
     @Bean
     public ServletRegistrationBean statViewServlet() {
-        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<StatViewServlet>(new StatViewServlet(), "/druid/*");
+        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
 
         // 这些参数可以在 com.alibaba.druid.support.http.StatViewServlet
         // 的父类 com.alibaba.druid.support.http.ResourceServlet 中找到
