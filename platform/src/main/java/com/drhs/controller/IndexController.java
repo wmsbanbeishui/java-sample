@@ -21,12 +21,6 @@ public class IndexController {
     @Autowired
     private EmployeesService employeesService;
 
-    @ApiOperation(value = "登录")
-    @GetMapping("/login")
-    public String index() {
-        return "Hello";
-    }
-
     @ApiOperation(value = "员工列表")
     @GetMapping("/employee/list/{page}/{limit}")
     public Map<String, Object> employeeList(@PathVariable Long page, @PathVariable Long limit) {

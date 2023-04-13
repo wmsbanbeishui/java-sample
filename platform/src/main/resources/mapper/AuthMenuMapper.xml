@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhs.mapper.AuthMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.drhs.entity.AuthMenu">
+            <id property="id" column="ID" jdbcType="DECIMAL"/>
+            <result property="pid" column="PID" jdbcType="DECIMAL"/>
+            <result property="name" column="NAME" jdbcType="VARCHAR"/>
+            <result property="uri" column="URI" jdbcType="VARCHAR"/>
+            <result property="orderIndex" column="ORDER_INDEX" jdbcType="DECIMAL"/>
+            <result property="status" column="STATUS" jdbcType="DECIMAL"/>
+            <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,PID,NAME,
+        URI,ORDER_INDEX,STATUS,
+        CREATE_TIME,UPDATE_TIME
+    </sql>
+</mapper>

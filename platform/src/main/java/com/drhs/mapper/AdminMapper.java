@@ -2,6 +2,7 @@ package com.drhs.mapper;
 
 import com.drhs.entity.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author 1011
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-04-11 15:08:23
 * @Entity com.drhs.entity.Admin
 */
+@Mapper
 public interface AdminMapper extends BaseMapper<Admin> {
 
 }

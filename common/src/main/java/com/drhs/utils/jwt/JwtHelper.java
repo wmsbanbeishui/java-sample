@@ -1,4 +1,4 @@
-package com.drhs.helper;
+package com.drhs.utils.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.CompressionCodecs;
@@ -46,8 +46,14 @@ public class JwtHelper {
             if (!StringUtils.hasLength(token)) return null;
 
             Claims claims = getClaimsFromToken(token);
-            Integer userId = (Integer) claims.get("userId");
-            return userId.longValue();
+
+            if (claims != null) {
+                Integer userId = (Integer) claims.get("userId");
+                return userId.longValue();
+            } else {
+                return null;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -64,7 +70,9 @@ public class JwtHelper {
             if (!StringUtils.hasLength(token)) return "";
 
             Claims claims = getClaimsFromToken(token);
-            return (String) claims.get("username");
+
+            return claims != null ? (String) claims.get("username") : null;
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;

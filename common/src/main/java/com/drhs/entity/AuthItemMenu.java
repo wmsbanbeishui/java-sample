@@ -3,40 +3,31 @@ package com.drhs.entity;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
-import java.util.Collection;
-
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
 
 /**
- * 管理员表
- * @TableName ADMIN
+ * 菜单权限映射表
+ * @TableName AUTH_ITEM_MENU
  */
 @KeySequence(value = "SEQ_ORA_INTEGER_KEY")
-@TableName(value ="ADMIN")
+@TableName(value ="AUTH_ITEM_MENU")
 @Data
-public class Admin implements Serializable {
+public class AuthItemMenu implements Serializable {
     /**
-     * id
+     * ID
      */
     @TableId(value = "ID", type = IdType.INPUT)
     private Long id;
 
     /**
-     * 用户名
+     * 菜单id
      */
-    @TableField("USERNAME")
-    private String username;
+    private Long menuId;
 
     /**
-     * 密码
+     * 权限路径
      */
-    @TableField("PASSWORD")
-    private String password;
-
-    @TableLogic // 逻辑删除
-    @TableField("IS_DEL")
-    private Integer isDel;
+    private String itemName;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -52,10 +43,10 @@ public class Admin implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Admin other = (Admin) that;
+        AuthItemMenu other = (AuthItemMenu) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()));
+            && (this.getMenuId() == null ? other.getMenuId() == null : this.getMenuId().equals(other.getMenuId()))
+            && (this.getItemName() == null ? other.getItemName() == null : this.getItemName().equals(other.getItemName()));
     }
 
     @Override
@@ -63,8 +54,8 @@ public class Admin implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getMenuId() == null) ? 0 : getMenuId().hashCode());
+        result = prime * result + ((getItemName() == null) ? 0 : getItemName().hashCode());
         return result;
     }
 
@@ -75,8 +66,8 @@ public class Admin implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
+        sb.append(", menuId=").append(menuId);
+        sb.append(", itemName=").append(itemName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

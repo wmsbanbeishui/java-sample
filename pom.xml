@@ -25,12 +25,14 @@
     <properties>
         <java.version>11</java.version>
         <druid.version>1.2.16</druid.version>
-        <fastjson.version>2.0.21</fastjson.version>
+        <fastjson.version>2.0.23</fastjson.version>
         <mybatis.version>3.4.1</mybatis.version>
         <knife4j.version>3.0.3</knife4j.version>
         <log4j.version>1.2.17</log4j.version>
         <jwt.version>0.11.5</jwt.version>
         <hutool.version>5.8.12</hutool.version>
+        <security.version>2.7.10</security.version>
+        <redis.version>2.7.10</redis.version>
     </properties>
 
     <dependencyManagement>
@@ -106,6 +108,22 @@
                 <version>${hutool.version}</version>
             </dependency>
             <!-- hutool -->
+
+            <!-- security -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${security.version}</version>
+            </dependency>
+            <!-- security -->
+
+            <!-- redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis.version}</version>
+            </dependency>
+            <!-- redis -->
 
             <!-- jdbc -->
             <dependency>
