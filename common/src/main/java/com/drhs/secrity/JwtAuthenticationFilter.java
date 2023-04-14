@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(request, response);
         } else {
-            ResponseUtil.out(response, ResponseParams.build(null, ResultCodeEnum.FORBIDDEN));
+            ResponseUtil.out(response, ResponseParams.build(null, ResultCodeEnum.UNAUTHORIZED));
         }
     }
 
@@ -85,9 +85,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             } else {
                 ResponseUtil.out(response,ResponseParams.build(null, ResultCodeEnum.UNAUTHORIZED));
             }
-
-            return new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
-
         }
         return null;
     }
