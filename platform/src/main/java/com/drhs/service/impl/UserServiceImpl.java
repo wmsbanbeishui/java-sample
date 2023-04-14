@@ -34,13 +34,22 @@ public class UserServiceImpl implements com.drhs.service.UserService {
 
     /**
      * 用户登录
+     *
      * @param loginVo
      * @return
      */
     @Override
     public ResponseParams<?> login(LoginVo loginVo) {
+        if (!StringUtils.hasLength(loginVo.getUsername())) {
+            throw new CustomException(201, "用户名不能为空");
+        }
+
+        if (!StringUtils.hasLength(loginVo.getPassword())) {
+            throw new CustomException(201, "密码不能为空");
+        }
+
         //封装 Authentication
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginVo.getUsername(),loginVo.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginVo.getUsername(), loginVo.getPassword());
 
         //认证用户
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
@@ -49,7 +58,7 @@ public class UserServiceImpl implements com.drhs.service.UserService {
             throw new CustomException(201, "用户不存在或密码错误");
         }
 
-        CustomUser userDetails = (CustomUser)authenticate.getPrincipal();
+        CustomUser userDetails = (CustomUser) authenticate.getPrincipal();
         Admin admin = userDetails.getAdmin();
 
         Map<String, Object> map = new HashMap<>();
@@ -57,27 +66,29 @@ public class UserServiceImpl implements com.drhs.service.UserService {
         map.put("token", JwtHelper.createToken(admin.getId(), admin.getUsername()));
 
         // 用户信息存入redis中
-        stringRedisTemplate.opsForValue().set("java-project:user:"+admin.getId(), JSON.toJSONString(admin));
-        stringRedisTemplate.opsForValue().set("java-project:userAuth:"+admin.getId(), JSON.toJSONString(userDetails.getAuthorities()));
+        stringRedisTemplate.opsForValue().set("java-project:user:" + admin.getId(), JSON.toJSONString(admin));
+        stringRedisTemplate.opsForValue().set("java-project:userAuth:" + admin.getId(), JSON.toJSONString(userDetails.getAuthorities()));
 
         return ResponseParams.ok(map);
     }
 
     /**
      * 退出登录
+     *
      * @return
      */
     @Override
     public ResponseParams<?> logout() {
         Integer userId = this.getCurrentUserId();
 
-        stringRedisTemplate.delete("java-project:user:"+userId);
+        stringRedisTemplate.delete("java-project:user:" + userId);
 
         return ResponseParams.ok();
     }
 
     /**
      * 获取当前用户id
+     *
      * @return
      */
     @Override

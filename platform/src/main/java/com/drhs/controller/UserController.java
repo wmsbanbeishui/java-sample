@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @Api(tags = "用户信息")
 @RestController
 @RequestMapping("/user")
@@ -32,3 +31,13 @@ public class UserController {
         return userService.logout();
     }
 }
+
+
+//登录时，将用户信息、权限信息写入redis
+//退出登录时，将redis中的用户信息删除
+//
+//
+//用户状态有变化时，比如删除或禁用时，要删除redis中的用户信息
+//
+//
+//用户权限有变化时，要更新redis中的用户权限信息

@@ -1,10 +1,17 @@
 package com.drhs.utils.exception;
 
 import com.drhs.utils.result.ResponseParams;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -14,7 +21,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseParams<?> error(Exception e) {
         e.printStackTrace();
-        return ResponseParams.fail().message("执行全局异常处理...");
+        return ResponseParams.fail().message("服务内部错误");
     }
 
     //特定异常处理

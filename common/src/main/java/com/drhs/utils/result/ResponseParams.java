@@ -9,13 +9,14 @@ public class ResponseParams<T> {
     private T data;//数据
 
     //私有化
-    private ResponseParams() {}
+    private ResponseParams() {
+    }
 
     //封装返回是数据
     public static <T> ResponseParams<T> build(T body, ResultCodeEnum resultCodeEnum) {
         ResponseParams<T> params = new ResponseParams<>();
         //封装数据
-        if(body != null) {
+        if (body != null) {
             params.setData(body);
         }
         //状态码
@@ -26,29 +27,29 @@ public class ResponseParams<T> {
     }
 
     //成功
-    public static<T> ResponseParams<T> ok() {
-        return build(null,ResultCodeEnum.SUCCESS);
+    public static <T> ResponseParams<T> ok() {
+        return build(null, ResultCodeEnum.SUCCESS);
     }
 
-    public static<T> ResponseParams<T> ok(T data) {
-        return build(data,ResultCodeEnum.SUCCESS);
+    public static <T> ResponseParams<T> ok(T data) {
+        return build(data, ResultCodeEnum.SUCCESS);
     }
 
     //失败
-    public static<T> ResponseParams<T> fail() {
-        return build(null,ResultCodeEnum.FAIL);
+    public static <T> ResponseParams<T> fail() {
+        return build(null, ResultCodeEnum.FAIL);
     }
 
-    public static<T> ResponseParams<T> fail(T data) {
-        return build(data,ResultCodeEnum.FAIL);
+    public static <T> ResponseParams<T> fail(T data) {
+        return build(data, ResultCodeEnum.FAIL);
     }
 
-    public ResponseParams<T> message(String msg){
+    public ResponseParams<T> message(String msg) {
         this.setMessage(msg);
         return this;
     }
 
-    public ResponseParams<T> code(Integer code){
+    public ResponseParams<T> code(Integer code) {
         this.setCode(code);
         return this;
     }

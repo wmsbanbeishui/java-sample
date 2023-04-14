@@ -1,5 +1,7 @@
 package com.drhs.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.drhs.mapper.AdminMapper;
 import com.drhs.secrity.CustomUser;
 import com.drhs.secrity.UserDetailsService;
 import com.drhs.entity.Admin;
@@ -18,7 +20,7 @@ import java.util.List;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private AdminService adminService;
+    private AdminMapper adminMapper;
 
     @Autowired
     private AuthItemService authItemService;
@@ -26,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Admin admin = adminService.getByUsername(username);
+        Admin admin = adminMapper.selectOne(new LambdaQueryWrapper<Admin>().eq(Admin::getUsername, username));
 
         if (admin == null) {
             throw new UsernameNotFoundException("用户不存在");
