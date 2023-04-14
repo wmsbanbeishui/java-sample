@@ -35,7 +35,6 @@ public class AdminController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         password = passwordEncoder.encode(password);
-        //password = SecureUtil.md5(password);
 
         Admin admin = new Admin();
         admin.setUsername(username);
@@ -50,7 +49,6 @@ public class AdminController {
     @PostMapping("/update")
     public String update(@RequestBody Admin admin) {
         String password = admin.getPassword();
-        //password = SecureUtil.md5(password);
         password = passwordEncoder.encode(password);
         admin.setPassword(password);
 

@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
+        UsernamePasswordAuthenticationToken authentication = getAuthentication(request, response);
         if (null != authentication) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(request, response);
@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request, HttpServletResponse response) {
         // token置于header里
         String token = request.getHeader("token");
         logger.info("token:" + token);
@@ -65,7 +65,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 //从redis中获取User，主要是用来判断该用户是否正常
                 String jsonUserInfo = stringRedisTemplate.opsForValue().get("java-project:user:" + userId);
                 if (!StringUtils.hasLength(jsonUserInfo)) {
-                    throw new CustomException(ResultCodeEnum.UNAUTHORIZED);
+                    ResponseUtil.out(response,ResponseParams.build(null, ResultCodeEnum.UNAUTHORIZED));
                 }
 
                 // 从redis获取权限数据
@@ -82,17 +82,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     }
                     return new UsernamePasswordAuthenticationToken(username,null, authList);
                 }
-
-                /*String authoritiesString = stringRedisTemplate.opsForValue().get("project:" + username);
-                JSONArray authArray = JSON.parseArray(authoritiesString);
-
-                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                for (Object auth : authArray) {
-                    authorities.add(new SimpleGrantedAuthority((String) auth));
-                }
-                return new UsernamePasswordAuthenticationToken(username, null, authorities);*/
             } else {
-                throw new CustomException(ResultCodeEnum.UNAUTHORIZED);
+                ResponseUtil.out(response,ResponseParams.build(null, ResultCodeEnum.UNAUTHORIZED));
             }
 
             return new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());

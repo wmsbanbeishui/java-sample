@@ -13,9 +13,13 @@ import org.springframework.stereotype.Service;
 * @createDate 2023-04-11 15:08:23
 */
 @Service
-public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin>
-    implements AdminService{
+public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService{
 
+    /**
+     * 根据用户名获取用户信息
+     * @param username
+     * @return
+     */
     @Override
     public Admin getByUsername(String username) {
         return this.getOne(new LambdaQueryWrapper<Admin>().eq(Admin::getUsername, username));

@@ -9,5 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-04-11 15:08:23
 */
 public interface AdminService extends IService<Admin> {
+
+    // 根据用户名获取用户信息
     Admin getByUsername(String username);
 }
